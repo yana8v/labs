@@ -37,24 +37,24 @@ def generate_key():
 
 
 def blink_title(): # мигание заголовка
-    if title['fg'] == 'white':
+    if title['fg'] == 'white': # фг - фореграунд
         title.config(fg='#c69b55')
     else:
         title.config(fg='white')
 
-    window.after(500, blink_title)
+    window.after(500, blink_title) # афтер - метод окна в тк для отложенного выполнения
 
-
+progress = 0
 def update_loading(): # загрузка
     global progress
-    progress += 10
+    progress += 4
     if progress > 180:
         progress = 180
 
     loading_bar.coords(loading_line, 0, 0, progress, 5)
 
     if progress < 180:
-        window.after(122, update_loading)
+        window.after(122, update_loading) # 122 мс
 
 
 def finish_loading(): # конец загрузки
@@ -97,10 +97,10 @@ title.place(relx=0.5, y=40, anchor='center') # расположение заго
 key_field = tk.Entry( # поле для пароля
     panel,
     font=('Arial', 16),
-    justify='center',
+    justify='center', # выравнивание
     bg='#333333',
     fg='white',
-    insertbackground='white',
+    insertbackground='white', # цвет курсора
     width=25
 )
 key_field.place(relx=0.5, y=110, anchor='center') # расположение его
@@ -142,7 +142,7 @@ loading_bar = tk.Canvas( # полоска загрузки
     width=180,
     height=5,
     bg='#333333',
-    highlightthickness=0
+    highlightthickness=0 # рамка
 )
 loading_bar.place(relx=0.5, rely=0.55, anchor='center')
 
@@ -158,7 +158,6 @@ pygame.mixer.music.load('music.mp3')
 pygame.mixer.music.play(-1)
 
 
-progress = 0 # начальное значение загрузки
 update_loading() # запускаем заполнение полоски
 window.after(5500, finish_loading) # через 5,5 секунд конец загрузки
 window.protocol('WM_DELETE_WINDOW', close_app) # функция для закрытия окна
